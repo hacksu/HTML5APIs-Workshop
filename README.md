@@ -7,6 +7,7 @@ Let's take a look at some interesting APIs that are added with the new [HTML5 sp
 * Fullscreen API
 * Link Prefetching
 * Geolocation API
+* Drag and Drop
 
 ## Foundation
 
@@ -132,3 +133,43 @@ Next, add the following JavaScript code to your js/scripts.js file.
     }
 
 Check it out! Now you can drag the image into the box :)
+
+## Get User Media API
+
+This little tutorial will allow you to capture video directly from your computer's webcam! First let's add a couple elements to our body tag in index.html.
+
+NOTE: This can not be run locally, use Brackets to run a local server with Chrome.
+
+	<video autoplay></video>
+	
+Now let's get juicy and write some lines of sweet JavaScript code. Add this to your js/scripts.js file.
+
+	var video = document.querySelector('video');
+
+	navigator.getMedia = ( navigator.getUserMedia ||
+	                       navigator.webkitGetUserMedia ||
+	                       navigator.mozGetUserMedia ||
+	                       navigator.msGetUserMedia);
+	
+	navigator.getMedia (
+	
+	   // constraints
+	   {
+	      video: true
+	   },
+	
+	   // successCallback
+	   function(localMediaStream) {
+	      video.src = window.URL.createObjectURL(localMediaStream);
+	      video.onloadedmetadata = function(e) {
+	         // Do something with the video here.
+	      };
+	   },
+	
+	   // errorCallback
+	   function(err) {
+	    console.log("The following error occured: " + err);
+	   }
+	);
+
+Now you must be wondering what this code means...
