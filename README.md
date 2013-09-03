@@ -8,7 +8,7 @@ Let's take a look at some interesting APIs that are added with the new [HTML5 sp
 
 ## Foundation
 
-The first thing we need is to make sure we are running an HTML5 capabale web browser. You can check out how well your broswer preforms [here](http://html5test.com/) and then also check the specific APIs [here](http://caniuse.com/). Make sure your browswer can handle all the APIs that we will be covering in this workshop.
+The first thing we need is to make sure we are running an HTML5 capabale web browser. You can check out how well your broswer performs [here](http://html5test.com/) and then also check the specific APIs [here](http://caniuse.com/). Make sure your browswer can handle all the APIs that we will be covering in this workshop.
 
 If you think you will run into problems get the latest version of [Chrome](http://www.google.com/chrome).
 
