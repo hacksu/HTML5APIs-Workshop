@@ -6,6 +6,7 @@ Let's take a look at some interesting APIs that are added with the new [HTML5 sp
 
 * Fullscreen API
 * Link Prefetching
+* Geolocation API
 
 ## Foundation
 
@@ -81,4 +82,26 @@ Just add the following to our index.html file somewhere inside the body tag.
     <!-- just an image -->
     <link rel="prefetch" href="https://pbs.twimg.com/media/BFAtXVcCEAIeMHM.jpg" />
     
+## Geolocation API
+
+Ever want to know the precise latitude and longitude of your user? You can now do this with HTML5 with some pure javascript.
+    
+First let's add a button to our HTML document inside the body tag to request the user's location. Add the following code to our index.html file.
+
+    <button onclick="getLocation()">Get Location</button>
+    
+Next let's add the JavaScript code to our scripts.js file.
+
+    function getLocation() {
+        navigator.geolocation.getCurrentPosition(printCoordinates);
+    }
+    
+    function printCoordinates(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        console.log('Latitude: ' + latitude);
+        console.log('Longitude: ' + longitude);
+    }
+    
+Load the index.html file and open the developer console to see the location printed!
 
