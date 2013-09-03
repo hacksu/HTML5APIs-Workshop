@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Html5apis-workshop by hacksu</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Html5apis-workshop</h1>
+        <p>Let's take a look at some interesting APIs that are added with the new HTML5 specifications.</p>
+
+        <p class="view"><a href="https://github.com/hacksu/HTML5APIs-Workshop">View the Project on GitHub <small>hacksu/HTML5APIs-Workshop</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/hacksu/HTML5APIs-Workshop/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/hacksu/HTML5APIs-Workshop/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/hacksu/HTML5APIs-Workshop">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="html5-apis-workshop" class="anchor" href="#html5-apis-workshop"><span class="octicon octicon-link"></span></a>HTML5 APIs Workshop</h1>
+
+<p>Let's take a look at some interesting APIs that are added with the new <a href="http://www.w3.org/html/wg/drafts/html/master/">HTML5 specifications</a>.</p>
+
+<h2>
+<a name="to-be-covered" class="anchor" href="#to-be-covered"><span class="octicon octicon-link"></span></a>To be covered</h2>
+
+<ul>
+<li>Fullscreen API</li>
+<li>Link Prefetching</li>
+<li>Geolocation API</li>
+<li>Drag and Drop</li>
+<li>Get User Media API</li>
+</ul><h2>
+<a name="foundation" class="anchor" href="#foundation"><span class="octicon octicon-link"></span></a>Foundation</h2>
+
+<p>The first thing we need is to make sure we are running an HTML5 capabale web browser. You can check out how well your broswer performs <a href="http://html5test.com/">here</a> and then also check the specific APIs <a href="http://caniuse.com/">here</a>. Make sure your browswer can handle all the APIs that we will be covering in this workshop.</p>
+
+<p>If you think you will run into problems get the latest version of <a href="http://www.google.com/chrome">Chrome</a>.</p>
+
+<h2>
+<a name="basic-template" class="anchor" href="#basic-template"><span class="octicon octicon-link"></span></a>Basic template</h2>
+
+<p>Listed below is the basic folder structure for this workshop as well as a basic HTML5 compliant structure for a new web page. This is the structure we will base the workshop on. Get familiar with all the basic elements and what they mean.</p>
+
+<pre><code>folder/
+    index.html
+    js/
+        scripts.js
+    css/
+        styles.css
+</code></pre>
+
+<p>If you are really clever, you will be able to code this from scratch!</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;HTML5 API Workshop&lt;/title&gt;
+        &lt;link rel="stylesheet" href="css/styles.css"&gt;
+        &lt;!--[if lt IE 9]&gt;
+            &lt;script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+        &lt;![endif]--&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;script src="js/scripts.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<h2>
+<a name="fullscreen-api" class="anchor" href="#fullscreen-api"><span class="octicon octicon-link"></span></a>Fullscreen API</h2>
+
+<p>This is a JavaScript API that allows developers to launch their web page into full screen in the browser, depending on user approval. This API comes in really handy for making games on the web.</p>
+
+<p>First let's add a button to our HTML document inside the body tag for the user to enter full screen mode. Add the following code to our index.html file.</p>
+
+<pre><code>&lt;button onclick="launchFullScreen()"&gt;Launch Full Screen&lt;/button&gt;
+</code></pre>
+
+<p>Next, add the following JavaScript code which does all the heavy lifting to use the full screen API. Add the following code to your js/scripts.js file.</p>
+
+<pre><code>// Find the right method, call on correct elements
+function launchFullScreen() {
+    var element = document.documentElement;
+    if (element.requestFullScreen) {
+        element.requestFullScreen();
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullScreen) {
+        element.webkitRequestFullScreen();
+    }
+}
+</code></pre>
+
+<p>Hit the button and see the magic at work!</p>
+
+<h2>
+<a name="link-prefetching" class="anchor" href="#link-prefetching"><span class="octicon octicon-link"></span></a>Link Prefetching</h2>
+
+<p>HTML5 allows you to silently preload sites or images to create a more seamless user experience.</p>
+
+<p>Just add the following to our index.html file somewhere inside the body tag.</p>
+
+<pre><code>&lt;!-- full page --&gt;
+&lt;link rel="prefetch" href="http://hacksu.cs.kent.edu" /&gt;
+
+&lt;!-- just an image --&gt;
+&lt;link rel="prefetch" href="https://pbs.twimg.com/media/BFAtXVcCEAIeMHM.jpg" /&gt;
+</code></pre>
+
+<h2>
+<a name="geolocation-api" class="anchor" href="#geolocation-api"><span class="octicon octicon-link"></span></a>Geolocation API</h2>
+
+<p>Ever want to know the precise latitude and longitude of your user? You can now do this with HTML5 with some pure javascript.</p>
+
+<p>First let's add a button to our HTML document inside the body tag to request the user's location. Add the following code to our index.html file.</p>
+
+<pre><code>&lt;button onclick="getLocation()"&gt;Get Location&lt;/button&gt;
+</code></pre>
+
+<p>Next let's add the JavaScript code to our scripts.js file.</p>
+
+<pre><code>function getLocation() {
+    navigator.geolocation.getCurrentPosition(printCoordinates);
+}
+
+function printCoordinates(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    console.log('Latitude: ' + latitude);
+    console.log('Longitude: ' + longitude);
+}
+</code></pre>
+
+<p>Load the index.html file and open the developer console to see the location printed!</p>
+
+<h2>
+<a name="drag-and-drop" class="anchor" href="#drag-and-drop"><span class="octicon octicon-link"></span></a>Drag and Drop</h2>
+
+<p>This is a new standard in HTML5 that allows elements to be drag and droppable. And the beautiful thing is, you don't need any library or external script anymore!</p>
+
+<p>Add the following code to our index.html file:</p>
+
+<pre><code>&lt;div id="dropper" ondrop="drop(event)" ondragover="allowDrop(event)" style="width:255px;height:255px;padding:10px;border:1px solid black;"&gt;&lt;/div&gt;
+
+&lt;img id="dragger" src="http://www.w3.org/html/logo/downloads/HTML5_Logo_512.png" draggable="true" ondragstart="drag(event)" width="250" height="250"&gt;
+</code></pre>
+
+<p>Next, add the following JavaScript code to your js/scripts.js file.</p>
+
+<pre><code>function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drag(event) {
+    event.dataTransfer.setData("Text",event.target.id);
+}
+
+function drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("Text");
+    event.target.appendChild(document.getElementById(data));
+}
+</code></pre>
+
+<p>Check it out! Now you can drag the image into the box :)</p>
+
+<h2>
+<a name="get-user-media-api" class="anchor" href="#get-user-media-api"><span class="octicon octicon-link"></span></a>Get User Media API</h2>
+
+<p>This little tutorial will allow you to capture video directly from your computer's webcam! First let's add a couple elements to our body tag in index.html.</p>
+
+<p>NOTE: This can not be run locally, use Brackets to run a local server with Chrome.</p>
+
+<pre><code>&lt;video autoplay&gt;&lt;/video&gt;
+</code></pre>
+
+<p>Now let's get juicy and write some lines of sweet JavaScript code. Add this to your js/scripts.js file.</p>
+
+<pre><code>var video = document.querySelector('video');
+
+navigator.getMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
+
+navigator.getMedia (
+
+   // constraints
+   {
+      video: true
+   },
+
+   // successCallback
+   function(localMediaStream) {
+      video.src = window.URL.createObjectURL(localMediaStream);
+      video.onloadedmetadata = function(e) {
+         // Do something with the video here.
+      };
+   },
+
+   // errorCallback
+   function(err) {
+    console.log("The following error occured: " + err);
+   }
+);
+</code></pre>
+
+<p>Now you must be wondering what this code means...</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/hacksu">hacksu</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
