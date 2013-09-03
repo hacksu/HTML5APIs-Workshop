@@ -5,6 +5,7 @@ Let's take a look at some interesting APIs that are added with the new [HTML5 sp
 ## To be covered
 
 * Fullscreen API
+* Link Prefetching
 
 ## Foundation
 
@@ -48,7 +49,7 @@ If you are really clever, you will be able to code this from scratch!
 
 This is a JavaScript API that allows developers to launch their web page into full screen in the browser, depending on user approval. This API comes in really handy for making games on the web.
 
-First let's add a button to our HTML document for the user to enter full screen mode. Add the following code to our index.html file.
+First let's add a button to our HTML document inside the body tag for the user to enter full screen mode. Add the following code to our index.html file.
 
     <button onclick="launchFullScreen()">Launch Full Screen</button>
     
@@ -68,4 +69,16 @@ Next, add the following JavaScript code which does all the heavy lifting to use 
     
 Hit the button and see the magic at work!
 
+## Link Prefetching
+
+HTML5 allows you to silently preload sites or images to create a more seamless user experience.
+
+Just add the following to our index.html file somewhere inside the body tag.
+
+    <!-- full page -->
+    <link rel="prefetch" href="http://hacksu.cs.kent.edu" />
+    
+    <!-- just an image -->
+    <link rel="prefetch" href="https://pbs.twimg.com/media/BFAtXVcCEAIeMHM.jpg" />
+    
 
