@@ -8,6 +8,7 @@ Let's take a look at some interesting APIs that are added with the new [HTML5 sp
 * Link Prefetching
 * Geolocation API
 * Drag and Drop
+* Get User Media API
 
 ## Foundation
 
