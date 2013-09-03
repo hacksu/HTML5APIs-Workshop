@@ -19,12 +19,14 @@ Listed below is a basic HTML5 compliant structure for a new web page. This is th
 If you are really clever, you will be able to code this from scratch!
 
     <!doctype html>
-    
+
     <html lang="en">
     <head>
       <meta charset="utf-8">
     
       <title>HTML5 API Workshop</title>
+
+      <link rel="stylesheet" href="css/styles.css">
     
       <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -32,5 +34,10 @@ If you are really clever, you will be able to code this from scratch!
     </head>
     
     <body>
+      <script src="js/scripts.js"></script>
     </body>
     </html>
+
+## Fullscreen API
+
+
