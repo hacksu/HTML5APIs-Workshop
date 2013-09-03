@@ -105,3 +105,29 @@ Next let's add the JavaScript code to our scripts.js file.
     
 Load the index.html file and open the developer console to see the location printed!
 
+## Drag and Drop
+
+This is a new standard in HTML5 that allows elements to be drag and droppable. And the beautiful thing is, you don't need any library or external script anymore!
+
+Let's make an element draggable. You simply set the draggable attribute to true. Add the following code to our index.html file:
+
+    <div id="dropper" ondrop="drop(event)" ondragover="allowDrop(event)" style="width:255px;height:255px;padding:10px;border:1px solid black;"></div>
+    <img id="dragger" src="http://www.w3.org/html/logo/downloads/HTML5_Logo_512.png" draggable="true" ondragstart="drag(event)" width="250" height="250">
+
+Next, add the following JavaScript code to your js/scripts.js file.
+
+    function allowDrop(event) {
+	    event.preventDefault();
+    }
+
+    function drag(event) {
+	    event.dataTransfer.setData("Text",event.target.id);
+    }
+
+    function drop(event) {
+	    ev.preventDefault();
+	    var data = event.dataTransfer.getData("Text");
+	    event.target.appendChild(document.getElementById(data));
+    }
+
+Check it out! Now you can drag the image into the box :)
